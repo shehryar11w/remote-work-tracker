@@ -1,83 +1,87 @@
-# React App Boilerplate
+# Welcome to React Router!
 
-A complete React application boilerplate following best practices and design patterns.
+A modern, production-ready template for building full-stack React applications using React Router.
 
-## Setup Instructions
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
 
-### 1. Install Dependencies
+## Features
+
+- 🚀 Server-side rendering
+- ⚡️ Hot Module Replacement (HMR)
+- 📦 Asset bundling and optimization
+- 🔄 Data loading and mutations
+- 🔒 TypeScript by default
+- 🎉 TailwindCSS for styling
+- 📖 [React Router docs](https://reactrouter.com/)
+
+## Getting Started
+
+### Installation
+
+Install the dependencies:
 
 ```bash
 npm install
 ```
 
-### 2. Environment Variables
+### Development
 
-Create a `.env` file in the root directory:
-
-```env
-REACT_APP_API_URL=http://localhost:8000/api
-REACT_APP_ENV=development
-```
-
-### 3. Run Development Server
+Start the development server with HMR:
 
 ```bash
 npm run dev
 ```
 
-The application will be available at `http://localhost:3000`
+Your application will be available at `http://localhost:5173`.
 
-### 4. Build for Production
+## Building for Production
+
+Create a production build:
 
 ```bash
 npm run build
 ```
 
-### 5. Preview Production Build
+## Deployment
+
+### Docker Deployment
+
+To build and run using Docker:
 
 ```bash
-npm run preview
+docker build -t my-app .
+
+# Run the container
+docker run -p 3000:3000 my-app
 ```
 
-## Project Structure
+The containerized application can be deployed to any platform that supports Docker, including:
 
-- `src/components/`: Reusable UI components
-- `src/pages/`: Page-level components
-- `src/hooks/`: Custom React hooks
-- `src/services/`: API clients and external services
-- `src/utils/`: Utility functions and helpers
-- `src/styles/`: Global styles and CSS variables
-- `public/`: Static assets
+- AWS ECS
+- Google Cloud Run
+- Azure Container Apps
+- Digital Ocean App Platform
+- Fly.io
+- Railway
 
-## Available Scripts
+### DIY Deployment
 
-- `npm run dev`: Start development server
-- `npm run build`: Build for production
-- `npm run preview`: Preview production build
-- `npm test`: Run tests
-- `npm run lint`: Lint code
-- `npm run format`: Format code with Prettier
+If you're familiar with deploying Node applications, the built-in app server is production-ready.
 
-## Adding New Features
+Make sure to deploy the output of `npm run build`
 
-1. **Create a new component**:
-   - Add component in `src/components/`
-   - Follow the component structure pattern
-   - Include PropTypes and tests
+```
+├── package.json
+├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
+├── build/
+│   ├── client/    # Static assets
+│   └── server/    # Server-side code
+```
 
-2. **Create a new page**:
-   - Add page in `src/pages/`
-   - Add route in `src/App.jsx`
+## Styling
 
-3. **Add a custom hook**:
-   - Create hook in `src/hooks/`
-   - Use the `use` prefix for naming
+This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
 
-## Development
+---
 
-- Use functional components with hooks
-- Follow the naming conventions
-- Write tests for components
-- Use CSS Modules for styling
-- Keep components small and focused
-
+Built with ❤️ using React Router.
