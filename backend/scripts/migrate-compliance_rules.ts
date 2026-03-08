@@ -1,7 +1,4 @@
-
-
 async function migrateComplianceRules() {
   
 }
-
 migrateComplianceRules();

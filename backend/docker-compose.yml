@@ -21,6 +21,6 @@ services:
       PORT: 3000
     depends_on:
       - db
-    command: sh -c "for f in scripts/*.ts; do npx ts-node \"$f\"; done && npx ts-node src/server.ts"
+    command: sh -c "npx ts-node scripts/migrate.ts && npx ts-node src/server.ts"
 volumes:
   postgres_data:

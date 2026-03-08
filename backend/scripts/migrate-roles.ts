@@ -1,7 +1,4 @@
-
-
 async function migrateRoles() {
   
 }
-
 migrateRoles();

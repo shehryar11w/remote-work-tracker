@@ -1,7 +1,4 @@
-
-
 async function migrateWorkSessions() {
   
 }
-
 migrateWorkSessions();
