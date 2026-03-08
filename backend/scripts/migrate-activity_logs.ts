@@ -1,16 +1,6 @@
-import { Client } from 'pg';
-import dotenv from 'dotenv';
-dotenv.config();
-const client = new Client({
-	host: process.env.DB_HOST,
-	port: Number(process.env.DB_PORT),
-	database: process.env.DB_NAME,
-	user: process.env.DB_USER,
-	password: process.env.DB_PASSWORD,
-});
+import { withDatabase } from './utils/db';
 export default async function migrateActivityLogs() {
-	try {
-		await client.connect();
+	await withDatabase(async (client) => {
 		await client.query(`CREATE EXTENSION IF NOT EXISTS "pgcrypto";`);
 		await client.query(`
 			CREATE TABLE IF NOT EXISTS activity_logs (
@@ -49,10 +39,5 @@ export default async function migrateActivityLogs() {
 			$$;
 		`);
 		console.log('Activity logs table migrated successfully with auto-updating updated_at.');
-	} catch (err) {
-		console.error('Migration failed:', err);
-		process.exit(1);
-	} finally {
-		await client.end();
-	}
+	});
 }
