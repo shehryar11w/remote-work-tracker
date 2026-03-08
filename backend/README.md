@@ -1,18 +1,47 @@
-# Node.js Express Application Boilerplate
 
-A complete Node.js Express application boilerplate following best practices and design patterns.
+# Remote Work Compliance & Task Tracker – Backend
 
-## Setup Instructions
+## Docker Usage
 
-### 1. Install Dependencies
+### Build the Docker Image
 
 ```bash
-npm install
+docker build -t remote-work-backend .
 ```
 
-### 2. Environment Variables
+### Run the Container
 
-Create a `.env` file in the root directory:
+```bash
+docker run -p 3000:3000 --env-file .env remote-work-backend
+```
+
+### Dockerfile Notes
+
+- Uses Node 20 Alpine and multi-stage build.
+- Installs dependencies and copies all files.
+- Exposes port 3000.
+- Runs database migrations (scripts/migrate.js) before starting the server (src/main.js).
+
+> **Important:**
+> If you use TypeScript, you must build your project (`npm run build` or `tsc`) before running in production. Update the Dockerfile to copy and run the compiled JavaScript (e.g., `dist/server.js`).
+
+---
+
+## Local Development
+
+1. Install dependencies:
+	```bash
+	npm install
+	```
+2. Create a `.env` file with your environment variables (see example below).
+3. Start the development server:
+	```bash
+	npm run dev
+	```
+
+---
+
+## Environment Variables Example
 
 ```env
 NODE_ENV=development
@@ -22,23 +51,22 @@ JWT_SECRET=your-secret-key-here
 JWT_EXPIRE=7d
 ```
 
-### 3. Start MongoDB
+---
 
-Make sure MongoDB is running on your system or use a cloud MongoDB instance.
+## Project Structure
 
-### 4. Run Development Server
+- `src/` – Application source code (TypeScript)
+- `scripts/` – Migration and seed scripts
+- `server.ts` – Main server entry point
 
-```bash
-npm run dev
-```
+---
 
-The server will be available at `http://localhost:3000`
+## Production Notes
 
-### 5. Run Production Server
+- Ensure your build process compiles TypeScript to JavaScript before running in Docker.
+- Adjust the Dockerfile CMD to match your compiled output (e.g., `node dist/server.js`).
 
-```bash
-npm start
-```
+---
 
 ## Project Structure
 

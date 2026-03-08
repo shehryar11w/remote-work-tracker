@@ -1,0 +1,7 @@
+
+
+async function migrateNotifications() {
+  
+}
+
+migrateNotifications();
