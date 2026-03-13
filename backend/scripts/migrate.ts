@@ -22,16 +22,17 @@ import migrateCourseEnrollments from './migrate-course_enrollments';
 import migrateWellnessLogs from './migrate-wellness_logs';
 import migrateNotifications from './migrate-notifications';
 import migrateActivityLogs from './migrate-activity_logs';
+import migrateAnalytics from './migrate-analytics';
+import resetPasswordResetsTable from './reset';
+import migrateDevices from './migrate-devices';
 
 async function runMigrations() {
 	await migrateOrganizations();
 	await migrateRoles();
 	await migrateDepartments();
 	await migrateUsers();
-	await migrateOrganizations();
-	await migrateRoles();
-	await migrateDepartments();
-	await migrateUsers();
+	await resetPasswordResetsTable();
+	await migrateDevices();
 	await migrateRefreshTokens();
 	await migrateProjects();
 	await migrateAttendance();
@@ -52,6 +53,7 @@ async function runMigrations() {
 	await migrateWellnessLogs();
 	await migrateNotifications();
 	await migrateActivityLogs();
+	await migrateAnalytics();
 	console.log('All migrations completed successfully.');
 }
 runMigrations();

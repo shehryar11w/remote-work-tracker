@@ -7,7 +7,8 @@ Request Body:
 {
   "latitude": 24.8607,
   "longitude": 67.0011,
-  "ipAddress": "192.168.1.1"
+  "ipAddress": "192.168.1.1",
+  "deviceId": "uuid-device" // optional, for device-based check-in
 }
 Validation:
 •	latitude → number, -90 to 90
@@ -23,14 +24,16 @@ Response (201 Created):
     "latitude": 24.8607,
     "longitude": 67.0011,
     "ipAddress": "192.168.1.1"
-  }
+  },
+  "deviceId": "uuid-device" // optional, for device-based check-in
 }
 
 2️⃣ Check-Out (Employee)
 POST /attendance/check-out
 Request Body:
 {
-  "sessionId": "uuid-session"
+  "sessionId": "uuid-session",
+  "deviceId": "uuid-device" // optional, for device-based check-out
 }
 Response (200 OK):
 {
@@ -152,4 +155,31 @@ SUPER_ADMIN	Full access
 {
   "error": "Session not found or already checked out"
 }
+
+## Device-based Attendance (NEW)
+
+If your organization uses device-based attendance, you can include a `deviceId` in the check-in and check-out requests. This links the attendance record to a specific registered device.
+
+### Check-In Example (with deviceId)
+POST /attendance/check-in
+Request Body:
+{
+  "latitude": 24.8607,
+  "longitude": 67.0011,
+  "ipAddress": "192.168.1.1",
+  "deviceId": "uuid-device" // optional, for device-based check-in
+}
+
+### Check-Out Example (with deviceId)
+POST /attendance/check-out
+Request Body:
+{
+  "sessionId": "uuid-session",
+  "deviceId": "uuid-device" // optional, for device-based check-out
+}
+
+### Notes:
+- If `deviceId` is provided, the attendance record will be linked to the specified device.
+- The response may include `deviceId` to indicate which device was used for the attendance event.
+- Device registration is required before using device-based attendance (see Agent/Device Registration API).
 

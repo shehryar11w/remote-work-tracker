@@ -16,11 +16,6 @@
 • Secure audit logs and digital signatures for compliance verification.
 
 
-
-
-
-
-
 ## Web Application
 Functional Requirements
 • User authentication and role-based access control (Admin, Manager, Employee).

@@ -1,5 +1,4 @@
 version: "3.8"
-
 services:
   db:
     image: postgres:15
@@ -17,7 +16,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-
   backend:
     build: .
     ports:
@@ -25,12 +23,21 @@ services:
     environment:
       DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@db:${DB_PORT}/${DB_NAME}
       JWT_SECRET: ${JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
       PORT: ${PORT}
       FRONTEND_URL: ${FRONTEND_URL}
     depends_on:
       db:
         condition: service_healthy
     command: sh -c "npx ts-node scripts/migrate.ts && npx ts-node src/server.ts"
-
+  ngrok:
+    image: ngrok/ngrok:latest
+    depends_on:
+      - backend
+    command: http backend:3000
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    ports:
+      - "4040:4040"
 volumes:
   postgres_data:

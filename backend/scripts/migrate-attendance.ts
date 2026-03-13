@@ -6,12 +6,14 @@ export default async function migrateAttendance() {
             CREATE TABLE IF NOT EXISTS attendance (
                 attendance_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
                 user_id UUID NOT NULL,
+                device_id UUID,
                 check_in TIMESTAMPTZ NOT NULL,
                 check_out TIMESTAMPTZ,
                 location VARCHAR(255),
                 created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
                 updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-                CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id)
+                CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id),
+                CONSTRAINT fk_device FOREIGN KEY(device_id) REFERENCES devices(device_id)
             );
         `);
         await client.query('CREATE INDEX IF NOT EXISTS idx_attendance_user_id ON attendance(user_id)');

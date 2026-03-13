@@ -12,6 +12,7 @@ export default async function migrateUsers() {
         organization_id UUID NOT NULL,
         region CHAR(2) NOT NULL,
         salary NUMERIC(12,2) NOT NULL CHECK (salary >= 0),
+        password_hash VARCHAR(255) NOT NULL,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         CONSTRAINT fk_department FOREIGN KEY(department_id) REFERENCES departments(department_id),
